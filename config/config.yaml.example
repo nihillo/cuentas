@@ -1,0 +1,27 @@
+SOURCE_DIR: ./orig
+TRANSACTIONS_DIR: movimientos
+OUTPUT_DIR: ./out
+OUTPUT_TRANSACTION_FILE: movimientos-unificado.xls
+OUTPUT_REPORT_FILE: informe.xls
+OUTPUT_COLUMNS:
+  DATE: Fecha
+  DESCRIPTION: Concepto
+  AMOUNT: Importe
+  CATEGORY: Categoria
+  ACCOUNT: Cuenta
+  HASH: Hash
+  YEAR_MONTH: Año-Mes
+  TRANSACTION_TYPE: Tipo
+  ABS_AMOUNT: Importe_abs
+  YEARLY_TOTAL: Total Anual
+  MONTHLY_TOTAL: Total Mensual
+  MONTHLY_AVG: Media Mensual
+  TYPE_TOTAL: Tipo_Total
+  TOTAL: TOTAL
+
+VALUES:
+  INCOME: INGRESO
+  EXPENSE: GASTO
+CATEGORIZER: REGEX
+CATEGORIES_DIR: ./config/categories
+REGEX_CATEGORY_INDEX: categories.dat

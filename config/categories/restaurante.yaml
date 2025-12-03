@@ -1,0 +1,42 @@
+name: RESTAURANTE
+regex: 
+  - Glovo
+  - Saona
+  - Quien La Invito
+  - Grama Lounge
+  - O Furancho
+  - Abades Puerta A
+  - Hermanos Vilar
+  - Pintxoterapia
+  - Heladeria
+  - Lizarran
+  - Costa Verde
+  - Amazonia Acai
+  - Juanchis Burgue
+  - Crepes\&waffles
+  - Fosters Hollywo
+  - Restaurante
+  - Rodilla
+  - Umh Madrid
+  - Vaguada Cafe Y
+  - La Canica
+  - Pastelerias For
+  - Bizum De.*(comida|Comida)
+  - Calway Station
+  - Menomale
+  - La Caña De Gonz
+  - Cafeteria Rio D\, San Sebastian
+  - Telepizza
+  - Familia Dada Sl
+  - CERVECERIA JB
+  - GINOS
+  - SALT 5 GROUP
+  - MO DE MOVIMIENTO
+  - LA PUERTA DE ANDA
+  - RITA SIBARITA
+  - (CAFETERIA )?VIPS
+  - BURGUER CARS
+  - ABADES PUERTA  AN
+  - CAFETAL
+  - LA BODEGUITA
+  - GELATERIA

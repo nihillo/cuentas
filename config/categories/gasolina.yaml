@@ -1,0 +1,10 @@
+name: GASOLINA
+regex:
+  - Cepsa
+  - Bp Puerta Andal
+  - Est Servicio
+  - E\.s\. Servicar C
+  - Cedipsa
+  - Es Aten Oil Ope
+  - GALP
+  - ESTACION SERVI(CIO)?

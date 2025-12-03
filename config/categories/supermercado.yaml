@@ -1,0 +1,13 @@
+name: SUPERMERCADO
+regex:
+  - ([Mm]ercadona|MERCADONA)
+  - ([Aa]ldi|ALDI)
+  - Garcon8 Superme
+  - ([Ss]upermercado|SUPERMERCADO)
+  - (unicafreshs|unicagroups)
+  - Suma Supermerca
+  - DIA \d{4}
+  - Market Golfo De
+  - CARREF
+  - ALIMENTACIO(N)?
+  - SIMPLY MARKET TRE

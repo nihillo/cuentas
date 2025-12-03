@@ -1,0 +1,16 @@
+name: ROPA
+regex: 
+  - Compra Online Pm\, Barcelona
+  - Compra.*Zara\.com
+  - Women(')?(s\sS|s)ecret
+  - WOMEN( S)? SECRET
+  - Primark
+  - Hm Gran Via
+  - Hm Plaza Norte
+  - Besson\, Madrid
+  - COOSY SHOP HERMOS
+  - Compra Bizum Tendam Retail S A
+  - OYSHO
+  - DISMODA  COMERCIO
+  - VF Jeanswear Espa
+  - KIABI
