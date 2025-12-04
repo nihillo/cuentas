@@ -1,3 +1,4 @@
+from calendar import month_abbr
 from glob import glob
 import yaml, os, sys
 import pandas as pd
@@ -103,15 +104,57 @@ def generate_report():
         values=CONFIG['OUTPUT_COLUMNS']['ABS_AMOUNT'],
         index=[CONFIG['OUTPUT_COLUMNS']['TRANSACTION_TYPE'], CONFIG['OUTPUT_COLUMNS']['CATEGORY']],
         columns=[CONFIG['OUTPUT_COLUMNS']['YEAR_MONTH']],
-        
         aggfunc='sum',
         fill_value=0
     )
-       
-    report_pivot[CONFIG['OUTPUT_COLUMNS']['YEARLY_TOTAL']] = report_pivot.sum(axis=1)
-    report_pivot[CONFIG['OUTPUT_COLUMNS']['MONTHLY_AVG']] = report_pivot.mean(axis=1).astype(float).round(2)
     
-    report_pivot.to_excel(os.path.join(CONFIG['OUTPUT_DIR'], CONFIG['OUTPUT_REPORT_FILE']), index=True)
+    all_types = df_transactions[CONFIG['OUTPUT_COLUMNS']['TRANSACTION_TYPE']].unique()
+    all_categories = df_transactions[CONFIG['OUTPUT_COLUMNS']['CATEGORY']].unique()
+    
+    full_index = pd.MultiIndex.from_product(
+        [all_types, all_categories],
+        names=[CONFIG['OUTPUT_COLUMNS']['TRANSACTION_TYPE'], CONFIG['OUTPUT_COLUMNS']['CATEGORY']]
+    )
+    
+    report_pivot = report_pivot.reindex(full_index, fill_value=0)
+            
+    report_pivot[CONFIG['OUTPUT_COLUMNS']['YEARLY_TOTAL']] = report_pivot.sum(axis=1)
+    month_columns = report_pivot.columns.drop(CONFIG['OUTPUT_COLUMNS']['YEARLY_TOTAL'])
+    report_pivot[CONFIG['OUTPUT_COLUMNS']['MONTHLY_AVG']] = report_pivot[month_columns].mean(axis=1).astype(float).round(2)
+    
+    income_by_category = report_pivot.loc[CONFIG['VALUES']['INCOME']]
+    expenses_by_category = report_pivot.loc[CONFIG['VALUES']['EXPENSE']]
+    
+    df_balance_by_category = income_by_category - expenses_by_category
+
+    df_balance_by_category.index.name = report_pivot.index.names[1]
+    
+    balance_index = pd.MultiIndex.from_product(
+        [['Balance Categoria'], df_balance_by_category.index],
+        names=report_pivot.index.names
+    )
+    
+    df_balance_by_category.index = balance_index
+
+    total_income = income_by_category.sum()
+    total_expenses = expenses_by_category.sum()
+    
+    df_total_balance_by_month = total_income - total_expenses
+    
+    total_index = pd.MultiIndex.from_product(
+        [['Balance Total'], ['TOTAL']],
+        names=report_pivot.index.names
+    )
+    
+    df_total_balance = pd.DataFrame(
+        df_total_balance_by_month.values.reshape(1, -1),
+        columns = report_pivot.columns,
+        index = total_index
+    )
+    
+    report_final = pd.concat([report_pivot, df_balance_by_category, df_total_balance])
+    
+    report_final.to_excel(os.path.join(CONFIG['OUTPUT_DIR'], CONFIG['OUTPUT_REPORT_FILE']), index=True)
     
 
 
